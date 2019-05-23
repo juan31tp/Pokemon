@@ -1,5 +1,5 @@
 package pokemon;
 
-public class Poisoned {
+public class Poisoned implements Status{
 
 }

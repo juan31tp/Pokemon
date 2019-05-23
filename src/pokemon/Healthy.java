@@ -1,5 +1,5 @@
 package pokemon;
 
-public class Healthy {
+public class Healthy implements Status{
 
 }

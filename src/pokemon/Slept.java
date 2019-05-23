@@ -1,5 +1,5 @@
 package pokemon;
 
-public class Slept {
+public class Slept implements Status{
 
 }

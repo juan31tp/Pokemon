@@ -1,5 +1,5 @@
 package pokemon;
 
-public class Paralized {
+public class Paralized implements Status{
 
 }

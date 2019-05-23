@@ -6,4 +6,5 @@ public class Combat {
 	Pokemon pokemon1, pokemon2;
 	Presenter presenter;
 	
+	
 }
