@@ -7,9 +7,9 @@ public class Specie {
 	private int id, health, attack, specialAttack, defense, specialDefense, speed;
 	private String name;
 	Type type, subType;
-	private List attackList;
+	private List<Attack> attackList;
 	
-	public Specie(String pokemonName, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, Type type, Type subType, List attackList) {
+	public Specie(String pokemonName, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, Type type, Type subType, List<Attack> attackList) {
 		this.health=health;
 		this.attack=attack;
 		this.defense=defense;
@@ -47,6 +47,10 @@ public class Specie {
 	
 	public int getSpecialAttack() {
 		return specialAttack;
+	}
+	
+	public List<Attack> getAttackList() {
+		return attackList;
 	}
 	
 }

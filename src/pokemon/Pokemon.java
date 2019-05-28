@@ -50,8 +50,12 @@ public class Pokemon{
 		return turnsAffected;
 	}
 	
+	public int getSpeed() {
+		return speed;
+	}
+	
 	/* ------------------ ATTACK METHOD -----------------*/
-	public void attack(int attack, Pokemon enemy) {
+	public void attack(int attack, Pokemon enemy){
 	}
 	
 	/* ------------------ MOVE BETWEEN DIFFERENT STATUS METHODS -----------------*/

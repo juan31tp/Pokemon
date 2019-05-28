@@ -65,5 +65,13 @@ public class Attack {
 		return power;
 	}
 
+	public void setCategory(Category category) {
+		this.category=category;
+	}
+	
+	Category getCategory() {
+		return category;
+	}
+
 	
 }
