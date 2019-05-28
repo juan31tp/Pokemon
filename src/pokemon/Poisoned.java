@@ -6,8 +6,16 @@ public class Poisoned implements Status{
 	public void attack(Pokemon attacker, Pokemon enemy, int attack) {
 	}
 
-	@Override
-	public void resolveStatus(Pokemon pokemon1, Pokemon pokemon2) {
+	public void resolveStatus(Pokemon pokemon) {
+		pokemon.setTurnsAffected(pokemon.getTurnsAffected()-1);
+		
+		if(pokemon.getTurnsAffected()==0) {
+			pokemon.setHealth(pokemon.getHealth()-(pokemon.getSpecie().getHealth()/8));
+			pokemon.moveToHealthyStatus();
+		} else {
+			pokemon.setHealth(pokemon.getHealth()-(pokemon.getSpecie().getHealth()/8));
+		}
 	}
+	
 
 }
