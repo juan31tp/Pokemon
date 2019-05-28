@@ -7,7 +7,7 @@ public class Healthy implements Status{
 	}
 
 	@Override
-	public void resolveStatus(Pokemon pokemon1, Pokemon pokemon2) {
+	public void resolveStatus(Pokemon pokemon) {
 	}
 
 }

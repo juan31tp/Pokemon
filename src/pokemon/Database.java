@@ -63,7 +63,7 @@ public enum Database {
 			attacks = objReader.lines()
 							   .map(s -> s.split(";"))
 							   .collect(Collectors.toMap( array -> Integer.parseInt(array[0]), 
-									  array -> (new Attack(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), array[4], types.get(Integer.parseInt(array[5]))))));
+									  array -> (new Attack(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), array[4], types.get(Integer.parseInt(array[5])), efectivities.get(types.get(Integer.parseInt(array[5])))))));
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

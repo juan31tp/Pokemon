@@ -2,7 +2,8 @@ package pokemon;
 
 public class Pokemon{
 
-	int health, speed, turnsWithoutPlaying;
+	private int health, speed, turnsAffected;
+	private boolean isParalized=false;
 	Specie specie;
 	
 	private Status status;
@@ -28,25 +29,68 @@ public class Pokemon{
 		this.speed=speed;
 	}
 	
+	public void setTurnsAffected(int turnsAffected) {
+		this.turnsAffected=turnsAffected;
+	}
+	
+	/* ------------------ GETTERS -----------------*/
+	public int getHealth() {
+		return health;
+	}
+	
+	public Specie getSpecie() {
+		return specie;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+	
+	public int getTurnsAffected() {
+		return turnsAffected;
+	}
+	
 	/* ------------------ ATTACK METHOD -----------------*/
 	public void attack(int attack, Pokemon enemy) {
 	}
 	
 	/* ------------------ MOVE BETWEEN DIFFERENT STATUS METHODS -----------------*/
 	void moveToParalizedStatus() {
-		this.status=paralized;
+		if(status==healthy) {
+			this.status=paralized;
+			isParalized=true;
+		} else {
+			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+		}
+		
 	}
 	
 	void moveToSleptStatus() {
-		this.status=slept;
+		if(status==healthy) {
+			this.status=slept;
+			turnsAffected= (int) ((Math.random() * ((5 - 1) + 1)) + 1);
+		} else {
+			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+		}
 	}
 	
 	void moveToPoisonedStatus() {
-		this.status=poisoned;
+		if(status==healthy) {
+			this.status=slept;
+			turnsAffected= (int) ((Math.random() * ((5 - 1) + 1)) + 1);
+		} else {
+			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+		}
 	}
 	
 	void moveToHealthyStatus() {
 		this.status=healthy;
 	}
+
+
+	
+
+
+	
 
 }
