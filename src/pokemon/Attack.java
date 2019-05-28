@@ -1,7 +1,5 @@
 package pokemon;
 
-import java.util.Map;
-
 public class Attack {
 	
 	private String attackName;
@@ -23,7 +21,20 @@ public class Attack {
 
 	/*This method will asign a category depending on the string*/
 	private Category asignCategory(String c) {
-		return null;
+		switch (c) {
+		case "ESTADOENV":
+			return new PoisonedStatus();
+		case "ESTADODOR":
+			return new SleptStatus();
+		case "FISICO":
+			return new Physical();
+		case "ESPECIAL":
+			return new Special();
+		case "ESTADOPAR":
+			return new ParalizedStatus();
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 	
 	

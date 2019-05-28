@@ -89,4 +89,22 @@ public enum Database {
 			e.printStackTrace();
 		}
 	}
+
+
+	public Map<Integer, Type> getTypes() {
+		return types;
+	}
+
+	public Map<Type, Map<Type, Double>> getEfectivities() {
+		return efectivities;
+	}
+
+	public Map<Integer, Attack> getAttacks() {
+		return attacks;
+	}
+
+	public Map<Integer, Specie> getSpecies() {
+		return species;
+	}
+
 }
