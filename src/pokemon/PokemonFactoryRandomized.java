@@ -1,8 +1,8 @@
 package pokemon;
 
-public class PokemonFactoryRandomized implements PokemonFactory{
+public class PokemonFactoryRandomized extends PokemonFactory{
 
-	public Pokemon create(Database database) {
+	public Pokemon create() {
 
 		int rnd;
 		

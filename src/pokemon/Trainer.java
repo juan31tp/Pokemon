@@ -5,7 +5,7 @@ import java.util.List;
 public abstract class Trainer {
 
 	String name;
-	PokemonFactory pokemonFactory;
+	PokemonFactoryRandomized pokemonFactoryRandomized;
 	Presenter presenter=new Presenter();
 	abstract String requestName();
 	abstract String requestOption();
@@ -17,7 +17,7 @@ public abstract class Trainer {
 		
 		for(int i=0; i<3; i++) {
 			int rnd = (int) (Math.random() * 31) + 1;
-			team.add(pokemonFactory.create(Database));
+			team.add(pokemonFactoryRandomized.create());
 		}
 		return team;
 	}

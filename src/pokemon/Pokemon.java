@@ -82,7 +82,7 @@ public class Pokemon{
 	void moveToPoisonedStatus() {
 		if(status==healthy) {
 			this.status=slept;
-			turnsAffected= (int) ((Math.random() * ((5 - 1) + 1)) + 1);
+			turnsAffected= 5;
 		} else {
 			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
 		}

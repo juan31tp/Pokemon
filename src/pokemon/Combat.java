@@ -59,7 +59,7 @@ public class Combat {
 		Machine machine=new Machine();
 		
 		//0.1 User will be allowed to choose his nickname
-		user.setName(user.requestName());
+		user.setName(trainer.requestName());
 		//0.2 Machine will take a random nickname
 		machine.setName(machine.requestName());
 	}

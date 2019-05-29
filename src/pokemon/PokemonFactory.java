@@ -1,6 +1,7 @@
 package pokemon;
 
-public interface PokemonFactory {
+public abstract class PokemonFactory {
 
-	Pokemon create(Database database);
+	Database database= Database.INSTANCE;
+	abstract Pokemon create();
 }
