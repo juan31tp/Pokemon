@@ -30,37 +30,121 @@ public class Combat {
 	
 	Combat(){
 		
+		int option1, option2;
+		
 		//0. We create the trainers
-		trainersCreation();
+		trainer1=new User();
+		trainer2=new Machine();
+		
+		//0.1 User will be allowed to choose his nickname
+		trainer1.requestName();
+		//0.2 Machine will take a random nickname
+		trainer2.requestName();
 		
 		//1. We assign three random pokemons to each trainer
-		List<Pokemon> userTeam = null;
-		List<Pokemon> machineTeam = null;
-		
-		userTeam=user.assignPokemon(userTeam);
-		machineTeam=assignPokemon(machineTeam);
+		trainer1.assignPokemon();
+		trainer2.assignPokemon();
 		
 		//2. Trainers will get out their first pokemon of the list
-		Pokemon userActualPokemon, machineActualPokemon;
-		userActualPokemon=userTeam.get(0);
-		machineActualPokemon=machineTeam.get(0);
-		
+		pokemon1=trainer1.pokeTeam.get(0);
+		pokemon2=trainer2.pokeTeam.get(0);
 		//2.1 The first pokemon and it's life is shown
-		presenter.showHealth(userActualPokemon);
-		presenter.showHealth(machineActualPokemon);
+		pokemon1.showHealth();
+		pokemon2.showHealth();
 		
+		//3. The battle starts and we enter in the turns stage
+		do {
+			//3.1 Trainers choose indepently what they want to do					//The first option will be attack
+			option1=trainer1.requestOption();										//The second option will be change the pokemon
+			option2=trainer2.requestOption();										//The third option will be surrender
+			
+			if(anySurrender(trainer1, option1, trainer2, option2)) {
+				if(anyChange(trainer1, option1, trainer2, option2)) {
+					bothAttack(trainer1, trainer2);
+				}
+			}
+			
+		//We check if both trainers have at least one pokemon living in their teams
+		trainer1.teamAlive=trainer1.checkTeamLife();
+		trainer2.teamAlive=trainer2.checkTeamLife();
+			
+		}while(!trainer1.surrender && !trainer2.surrender && trainer1.teamAlive && trainer2.teamAlive);
 		
 	}
 
-	private void trainersCreation() {
+	//This method will be executed when no one of the trainers want to change a pokemon or surrender, so it will check what pokemon is faster and this one will attack first and then,
+	// 		if the pokemon doesnt die, the other attacks.
+	private void bothAttack(Trainer trainer12, Trainer trainer22) {
 		
-		//Trainers building
-		User user=new User();
-		Machine machine=new Machine();
+		if(pokemon1.getSpeed()>pokemon2.getSpeed()) {	//As pokemon1 is faster, he will attack first
+			pokemon1.attack(trainer1.requestAttack(), pokemon2);
+			int aux=trainer2.requestAttack(); //We save the attack decided by trainer2 to use it or not, depending on if his pokemon die.
+			//If pokemon1 kills pokemon2, we will show the pokemon1 health and we will ask the trainer2 for another pokemon to continue
+			if(pokemon2.getHealth()<=0) {
+				pokemon1.showHealth();
+				pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
+			} else {
+				pokemon2.attack(aux, pokemon1);
+				//We show the health status
+				pokemon1.showHealth();
+				pokemon2.showHealth();
+			}
+		} else {	//As pokemon1 is slower, pokemon2 will attack first
+			pokemon2.attack(trainer2.requestAttack(), pokemon1);
+			int aux=trainer1.requestAttack(); //We save the attack decided by trainer1 to use it or not, depending on if his pokemon die.
+			//If pokemon2 kills pokemon1, we will show the pokemon2 health and we will ask the trainer1 for another pokemon to continue
+			if(pokemon1.getHealth()<=0) {
+				pokemon2.showHealth();
+				pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
+			} else {
+				pokemon1.attack(aux, pokemon2);
+				//We show the health status
+				pokemon1.showHealth();
+				pokemon2.showHealth();
+			}
+		}
+	}
+
+	//This method will check if some of the trainers has decided to change any pokemon of the team, if yes, he will change and the other trainer will attack
+	private boolean anyChange(Trainer trainer12, int option1, Trainer trainer22, int option2) {
 		
-		//0.1 User will be allowed to choose his nickname
-		user.setName(trainer.requestName());
-		//0.2 Machine will take a random nickname
-		machine.setName(machine.requestName());
+		boolean anyChange=false;
+		
+		if(option1==2) {
+			//Trainer 1 changes his pokemon
+			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+			int selectedAttack=trainer2.requestAttack();
+			pokemon1.showHealth();
+			pokemon2.attack(selectedAttack, pokemon1);
+			return true;
+		} else if (option2==2){
+			//Trainer 1 changes his pokemon
+			pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+			int selectedAttack=trainer1.requestAttack();
+			pokemon2.showHealth();
+			pokemon1.attack(selectedAttack, pokemon2);
+			return true;
+		}
+		
+		
+		return anyChange;
+	}
+
+	//This method will check if some of the trainers has surrender
+	private boolean anySurrender(Trainer trainer12, int option1, Trainer trainer22, int option2) {
+		
+		boolean anySurrender=false;
+		
+		if(option1==3) {
+			trainer1.surrender();
+			return true;
+		} else if(option2==3) {
+			trainer2.surrender();
+			return true;
+		}
+			
+		return anySurrender;
 	}
 }

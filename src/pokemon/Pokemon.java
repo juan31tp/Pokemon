@@ -92,10 +92,9 @@ public class Pokemon{
 		this.status=healthy;
 	}
 
-
+	/* ------------------PRESENTER FUNCTIONS -----------------*/
+	void showHealth() {
+		
+	}
 	
-
-
-	
-
 }
