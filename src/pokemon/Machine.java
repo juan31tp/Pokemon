@@ -1,5 +1,5 @@
 package pokemon;
 
-public class Machine {
+public class Machine extends Trainer{
 
 }

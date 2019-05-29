@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Specie {
 
-	private int id, health, attack, specialAttack, defense, specialDefense, speed;
+	private int health, attack, specialAttack, defense, specialDefense, speed;
 	private String name;
 	Type type, subType;
 	private List<Attack> attackList;
@@ -45,12 +45,11 @@ public class Specie {
 		return attack;
 	}
 	
-	public int getSpecialAttack() {
+	public Attack getAttack(int a) {
+		return attackList.get(a);
+	}
+
+	public double getSpecialAttack() {
 		return specialAttack;
 	}
-	
-	public List<Attack> getAttackList() {
-		return attackList;
-	}
-	
 }

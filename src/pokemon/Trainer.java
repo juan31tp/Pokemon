@@ -1,17 +1,27 @@
 package pokemon;
 
+import java.util.List;
+
 public abstract class Trainer {
 
 	String name;
-	//Pokemon List<Pokemon>;
 	PokemonFactory pokemonFactory;
-	
+	Presenter presenter=new Presenter();
 	abstract String requestName();
 	abstract String requestOption();
 	abstract int requestAttack();
-	abstract int rrequestPokemon();
+	abstract int requestPokemon();
 	
-	void assignStarterPokemons() {
+	
+	List<Pokemon> assignPokemon(List<Pokemon> team) {
+		
+		for(int i=0; i<3; i++) {
+			int rnd = (int) (Math.random() * 31) + 1;
+			team.add(pokemonFactory.create(Database));
+		}
+		return team;
 	}
+	
+
 	
 }

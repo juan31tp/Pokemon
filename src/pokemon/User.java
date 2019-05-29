@@ -1,6 +1,6 @@
 package pokemon;
 
-public class User {
+public class User extends Trainer{
 
 	Presenter presenter;
 }

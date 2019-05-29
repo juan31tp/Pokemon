@@ -63,6 +63,7 @@ public class Pokemon{
 		if(status==healthy) {
 			this.status=paralized;
 			isParalized=true;
+			this.speed=speed/2;
 		} else {
 			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
 		}
