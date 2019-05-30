@@ -1,11 +1,12 @@
 package pokemon;
 
-public class Pokemon{
+public class Pokemon implements pokemonPresenter{
 
 	private int health, speed, turnsAffected;
 	private boolean isParalized=false;
 	Specie specie;
 	
+	Presenter presenter=new Presenter();
 	private Status status;
 	private Healthy healthy=new Healthy();
 	private Paralized paralized=new Paralized();
@@ -66,8 +67,9 @@ public class Pokemon{
 			this.status=paralized;
 			isParalized=true;
 			this.speed=speed/2;
+			isParalized(this);
 		} else {
-			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+			noMoreStates(this);
 		}
 		
 	}
@@ -76,8 +78,9 @@ public class Pokemon{
 		if(status==healthy) {
 			this.status=slept;
 			turnsAffected= (int) ((Math.random() * ((5 - 1) + 1)) + 1);
+			isSlept(this);
 		} else {
-			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+			noMoreStates(this);
 		}
 	}
 	
@@ -85,8 +88,9 @@ public class Pokemon{
 		if(status==healthy) {
 			this.status=slept;
 			turnsAffected= 5;
+			isPoisoned(this);
 		} else {
-			//MSJ: EL POKEMON NO PUEDE TENER MÁS DE UN ESTADO
+			noMoreStates(this);
 		}
 	}
 	
@@ -99,12 +103,40 @@ public class Pokemon{
 	}
 
 	/* ------------------PRESENTER FUNCTIONS -----------------*/
-	void showHealth() {
-		
+	public void showHealth() {
+		presenter.showHealth(this);
 	}
 
+	public void hasDied() {
+		presenter.hasDied(this);
+	}
 
-	void hasDied() {
+	public void isParalized(Pokemon pokemon) {
+		presenter.isParalized(pokemon);
+	}
+
+	public void isSlept(Pokemon pokemon) {
+		presenter.isSlept(pokemon);
+	}
+
+	public void isPoisoned(Pokemon pokemon) {
+		presenter.isPoisoned(pokemon);
+	}
+
+	public void noMoreStates(Pokemon pokemon) {
+		presenter.noMoreStates(pokemon);
+	}
+
+	public void dontAttackParalized(Pokemon pokemon) {
+		presenter.dontAttackParalized(pokemon);
+	}
+
+	public void lifeLostPoisoned(Pokemon pokemon) {
+		presenter.lifeLostPoisoned(pokemon);
+	}
+
+	public void dontAttackSlept(Pokemon pokemon) {
+		presenter.dontAttackSlept(pokemon);
 	}
 	
 }

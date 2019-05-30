@@ -1,24 +1,31 @@
 package pokemon;
 
-public class User extends Trainer{
+public class User extends Trainer implements UserPresenter{
 
-	String requestName() {
-		this.name=presenter.requestName();
+	@Override
+	public void showWinner() {
 	}
 
 	@Override
-	int requestOption() {
-		option=presenter.requestOption();
+	public String requestName() {
+		return null;
 	}
 
 	@Override
-	int requestAttack() {
-		selectedAttack=presenter.requestAttack();
+	public int requestOption() {
+		return 0;
 	}
 
 	@Override
-	int requestPokemon() {
-		this.pokemonSelected=presenter.requestPokemon();
+	public int requestAttack() {
+		return 0;
 	}
+
+	@Override
+	public int requestPokemon() {
+		return 0;
+	}
+
+
 
 }

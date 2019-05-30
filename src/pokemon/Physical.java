@@ -35,16 +35,15 @@ public class Physical implements Category{
 		
 		//Efectivity calculation
 		e=attack.getEfectivities().get(enemy.getSpecie().getType());
-		
 		//Power calculation
 		p=attack.getPower();
-		
 		//Defense calculation
 		d=enemy.getSpecie().getDefense();
-		
 		//Attack calculation
 		a=attacker.getSpecie().getAttack();
 		
+		
+		//HURT CALCULATION
 		hurt=(int) (0.01 * b * e * variation * (((0.2*N+1)*a*p)/25*d + 2));
 	
 		

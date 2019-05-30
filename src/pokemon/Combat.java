@@ -58,8 +58,8 @@ public class Combat {
 			option1=trainer1.requestOption();										//The second option will be change the pokemon
 			option2=trainer2.requestOption();										//The third option will be surrender
 			
-			if(anySurrender(trainer1, option1, trainer2, option2)) {
-				if(anyChange(trainer1, option1, trainer2, option2)) {
+			if(!anySurrender(trainer1, option1, trainer2, option2)) {
+				if(!anyChange(trainer1, option1, trainer2, option2)) {
 					bothAttack(trainer1, trainer2);
 				}
 			}
@@ -70,11 +70,21 @@ public class Combat {
 			
 		}while(!trainer1.surrender && !trainer2.surrender && trainer1.teamAlive && trainer2.teamAlive);
 		
+		if(!trainer1.surrender || !trainer2.teamAlive) {
+			showWinner(trainer1);
+		} else if(!trainer2.surrender || !trainer1.teamAlive) {
+			showWinner(trainer2);
+		}
+		
+	}
+
+	private void showWinner(Trainer trainer) {
+		presenter.showWinner(trainer);
 	}
 
 	//This method will be executed when no one of the trainers want to change a pokemon or surrender, so it will check what pokemon is faster and this one will attack first and then,
 	// 		if the pokemon doesnt die, the other attacks.
-	private void bothAttack(Trainer trainer12, Trainer trainer22) {
+	private void bothAttack(Trainer trainer1, Trainer trainer2) {
 			
 		if(pokemon1.getSpeed()>pokemon2.getSpeed()) {	//As pokemon1 is faster, he will attack first
 			pokemon1.attack(trainer1.requestAttack(), pokemon2);
@@ -91,6 +101,7 @@ public class Combat {
 				pokemon2.attack(aux, pokemon1);
 				if(pokemon1.getHealth()<=0) {
 					pokemon1.moveToDiedStatus();
+					pokemon1.hasDied();
 					pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 				}
 				//We show the health status
@@ -120,7 +131,7 @@ public class Combat {
 	}
 
 	//This method will check if some of the trainers has decided to change any pokemon of the team, if yes, he will change and the other trainer will attack
-	private boolean anyChange(Trainer trainer12, int option1, Trainer trainer22, int option2) {
+	private boolean anyChange(Trainer trainer1, int option1, Trainer trainer2, int option2) {
 		
 		boolean anyChange=false;
 		
@@ -147,7 +158,7 @@ public class Combat {
 	}
 
 	//This method will check if some of the trainers has surrender
-	private boolean anySurrender(Trainer trainer12, int option1, Trainer trainer22, int option2) {
+	private boolean anySurrender(Trainer trainer1, int option1, Trainer trainer2, int option2) {
 		
 		boolean anySurrender=false;
 		

@@ -29,10 +29,15 @@ public abstract class Trainer {
 	
 	//This method assigns 3 pokemon to the trainer's team
 	void assignPokemon() {
-		for(int i=0; i<3; i++) {
-			int rnd = (int) (Math.random() * 31) + 1;
-			pokeTeam.add(pokemonFactoryRandomized.create());
-		}
+		do {
+			Pokemon auxPokemon=pokemonFactoryRandomized.create();
+			for(Pokemon pokemon:pokeTeam) {
+				if(!auxPokemon.equals(pokemon)) {
+					pokeTeam.add(auxPokemon);
+				}
+			}
+			
+		} while(pokeTeam.size()<4);
 	}
 	
 	//This method sets the surrender option to true

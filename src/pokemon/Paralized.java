@@ -9,7 +9,7 @@ public class Paralized implements Status{
 		int rnd = (int) (Math.random() * 4) + 1;
 		
 		if(rnd==1) {
-			//MSJ: TE HAS QUEDADO PARALIZADO
+			attacker.dontAttackParalized(attacker);
 		} else {
 			attacker.getSpecie().getAttack(attack).attack(attacker, enemy);
 		}

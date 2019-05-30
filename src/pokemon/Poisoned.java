@@ -12,6 +12,8 @@ public class Poisoned implements Status{
 	public void resolveStatus(Pokemon pokemon) {
 		pokemon.setTurnsAffected(pokemon.getTurnsAffected()-1);
 		
+		pokemon.lifeLostPoisoned(pokemon);
+		
 		if(pokemon.getTurnsAffected()==0) {
 			pokemon.setHealth(pokemon.getHealth()-(pokemon.getSpecie().getHealth()/8));
 			pokemon.moveToHealthyStatus();

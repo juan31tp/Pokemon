@@ -4,7 +4,7 @@ public class Slept implements Status{
 
 	@Override
 	public void attack(Pokemon attacker, Pokemon enemy, int attack) {
-		//PRESENTER "TU POKEMON ESTA DORMIDO Y NO PUEDE ATACAR"
+		attacker.dontAttackSlept(attacker);
 	}
 
 	@Override

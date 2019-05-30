@@ -9,7 +9,13 @@ public class Specie {
 	Type type, subType;
 	private List<Attack> attackList;
 	
+	
+	public String getName() {
+		return name;
+	}
+
 	public Specie(String pokemonName, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, Type type, Type subType, List<Attack> attackList) {
+		this.name=name;
 		this.health=health;
 		this.attack=attack;
 		this.defense=defense;
