@@ -5,6 +5,7 @@ import java.util.List;
 public abstract class Trainer {
 
 	String name;
+	int option, selectedAttack, pokemonSelected;
 	boolean surrender, teamAlive;
 	PokemonFactoryRandomized pokemonFactoryRandomized;
 	Presenter presenter=new Presenter();
@@ -13,8 +14,9 @@ public abstract class Trainer {
 	abstract int requestOption();
 	abstract int requestAttack();
 	abstract int requestPokemon();
-	abstract boolean surrender();
 	
+	
+	/*---- BASIC METHOS THAT ARE THE SAME FOR ALL THE TRAINERS ----*/
 	
 	//This method checks if the team is alive, we consider that a team is alive if just one of the pokemons has more than 0 as health
 	boolean checkTeamLife() {
@@ -25,14 +27,18 @@ public abstract class Trainer {
 		}
 	}
 	
+	//This method assigns 3 pokemon to the trainer's team
 	void assignPokemon() {
-		
 		for(int i=0; i<3; i++) {
 			int rnd = (int) (Math.random() * 31) + 1;
 			pokeTeam.add(pokemonFactoryRandomized.create());
 		}
 	}
 	
+	//This method sets the surrender option to true
+	void surrender() {
+		this.surrender=true;
+	}
 
 	
 }

@@ -11,6 +11,7 @@ public class Pokemon{
 	private Paralized paralized=new Paralized();
 	private Slept slept=new Slept();
 	private Poisoned poisoned=new Poisoned();
+	private Died died=new Died();
 	
 	/*This will be the constructor for each pokemon the trainer has*/
 	public Pokemon(Specie specie) {
@@ -56,6 +57,7 @@ public class Pokemon{
 	
 	/* ------------------ ATTACK METHOD -----------------*/
 	public void attack(int attack, Pokemon enemy){
+		status.attack(this, enemy, attack);
 	}
 	
 	/* ------------------ MOVE BETWEEN DIFFERENT STATUS METHODS -----------------*/
@@ -88,6 +90,10 @@ public class Pokemon{
 		}
 	}
 	
+	void moveToDiedStatus() {
+		this.status=died;
+	}
+	
 	void moveToHealthyStatus() {
 		this.status=healthy;
 	}
@@ -95,6 +101,10 @@ public class Pokemon{
 	/* ------------------PRESENTER FUNCTIONS -----------------*/
 	void showHealth() {
 		
+	}
+
+
+	void hasDied() {
 	}
 	
 }
