@@ -19,6 +19,7 @@ public class Pokemon implements pokemonPresenter{
 		this.health=specie.getHealth();
 		this.speed=specie.getSpeed();
 		status=healthy; //We inicialize the status as healthy.
+		this.specie=specie;
 	}
 	
 	

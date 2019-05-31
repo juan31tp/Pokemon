@@ -23,7 +23,7 @@ public class Machine extends Trainer{
 	}
 
 	@Override
-	int requestAttack() {
+	int requestAttack(Pokemon pokemon) {
 		int rnd = r.nextInt(4-1) + 1;
 		
 		return rnd;
@@ -35,7 +35,7 @@ public class Machine extends Trainer{
 		int rnd;
 		
 		do {
-			rnd = r.nextInt(4-1) + 1;
+			rnd = r.nextInt(3);
 		}while(this.pokeTeam.get(rnd).getStatus() instanceof Died);
 		
 		return rnd;

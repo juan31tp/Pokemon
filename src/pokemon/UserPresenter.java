@@ -6,7 +6,7 @@ public interface UserPresenter {
 	String requestName();
 	int requestOption();
 	int requestPokemon();
-	int requestAttack();
+	int requestAttack(Pokemon pokemon);
 	
 	/*Show methods*/
 	void showWinner();

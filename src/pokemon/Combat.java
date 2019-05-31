@@ -33,13 +33,13 @@ public class Combat {
 		int option1, option2;
 		
 		//0. We create the trainers
-		trainer1=new User();
+		trainer1=new Machine();
 		trainer2=new Machine();
 		
 		//0.1 User will be allowed to choose his nickname
-		trainer1.requestName();
+		trainer1.setName();
 		//0.2 Machine will take a random nickname
-		trainer2.requestName();
+		trainer2.setName();
 		
 		//1. We assign three random pokemons to each trainer
 		trainer1.assignPokemon();
@@ -74,7 +74,12 @@ public class Combat {
 			showWinner(trainer1);
 		} else if(!trainer2.surrender || !trainer1.teamAlive) {
 			showWinner(trainer2);
+		}else if(trainer1.checkTeamLife()==false){
+			showWinner(trainer2);
+		}else if(trainer2.checkTeamLife()==false){
+			showWinner(trainer1);
 		}
+		                                         
 		
 	}
 
@@ -87,46 +92,71 @@ public class Combat {
 	private void bothAttack(Trainer trainer1, Trainer trainer2) {
 			
 		if(pokemon1.getSpeed()>pokemon2.getSpeed()) {	//As pokemon1 is faster, he will attack first
-			pokemon1.attack(trainer1.requestAttack(), pokemon2);
-			int aux=trainer2.requestAttack(); //We save the attack decided by trainer2 to use it or not, depending on if his pokemon die.
+			pokemon1.attack(trainer1.requestAttack(pokemon1), pokemon2);
+			int aux=trainer2.requestAttack(pokemon2); //We save the attack decided by trainer2 to use it or not, depending on if his pokemon die.
 			//If pokemon1 kills pokemon2, we will show the pokemon1 health and we will ask the trainer2 for another pokemon to continue
 			if(pokemon2.getHealth()<=0) {
-				pokemon1.showHealth();
+				//pokemon1.showHealth();
 				pokemon2.moveToDiedStatus();	//This method wills how the trianer that his pokemon has died
-				pokemon2.attack(aux, pokemon1);
-				pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
-				pokemon2.showHealth();
+				//pokemon2.attack(aux, pokemon1);
+				if(trainer2.checkTeamLife()){
+					pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+				}else {
+					presenter.showWinner(trainer1);
+				}
+				//pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+				//pokemon2.showHealth();
 			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
 			} else {
 				pokemon2.attack(aux, pokemon1);
 				if(pokemon1.getHealth()<=0) {
 					pokemon1.moveToDiedStatus();
 					pokemon1.hasDied();
-					pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+					if(trainer1.checkTeamLife()) {
+						pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+					}else {
+						presenter.showWinner(trainer2);
+					}
+					//pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 				}
-				//We show the health status
-				pokemon1.showHealth();
-				pokemon2.showHealth();
 			}
+			//We resolve the status from each pokemon
+			pokemon1.getStatus().resolveStatus(pokemon1);
+			pokemon2.getStatus().resolveStatus(pokemon2);
+			//We show the health status
+			pokemon1.showHealth();
+			pokemon2.showHealth();
 		} else {	//As pokemon1 is slower, pokemon2 will attack first
-			pokemon2.attack(trainer2.requestAttack(), pokemon1);
-			int aux=trainer1.requestAttack(); //We save the attack decided by trainer1 to use it or not, depending on if his pokemon die.
+			pokemon2.attack(trainer2.requestAttack(pokemon2), pokemon1);
+			int aux=trainer1.requestAttack(pokemon1); //We save the attack decided by trainer1 to use it or not, depending on if his pokemon die.
 			//If pokemon2 kills pokemon1, we will show the pokemon2 health and we will ask the trainer1 for another pokemon to continue
 			if(pokemon1.getHealth()<=0) {
-				pokemon2.showHealth();
-				pokemon1.hasDied();		//This method wills how the trianer that his pokemon has died
-				pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+				//pokemon1.showHealth();
+				//pokemon1.hasDied();		//This method wills how the trianer that his pokemon has died
+				pokemon1.moveToDiedStatus();
+				if(trainer1.checkTeamLife()) {
+					pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+				}else {
+					presenter.showWinner(trainer2);
+				}
 			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
 			} else {
 				pokemon1.attack(aux, pokemon2);
 				if(pokemon2.getHealth()<=0) {
 					pokemon2.moveToDiedStatus();
-					pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+					if(trainer2.checkTeamLife()){
+						pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+					}else {
+						presenter.showWinner(trainer1);
+					}
 				}
-				//We show the health status
-				pokemon1.showHealth();
-				pokemon2.showHealth();
 			}
+			//We resolve the status from each pokemon
+			pokemon1.getStatus().resolveStatus(pokemon1);
+			pokemon2.getStatus().resolveStatus(pokemon2);
+			//We show the health status
+			pokemon1.showHealth();
+			pokemon2.showHealth();
 		}
 	}
 
@@ -138,14 +168,14 @@ public class Combat {
 		if(option1==2) {
 			//Trainer 1 changes his pokemon
 			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
-			int selectedAttack=trainer2.requestAttack();					//We save the attack selected to maintain the order of the turn
+			int selectedAttack=trainer2.requestAttack(pokemon2);			//We save the attack selected to maintain the order of the turn
 			pokemon1.showHealth();
 			pokemon2.attack(selectedAttack, pokemon1);
 			return true;
 		} else if (option2==2){
 			//Trainer 1 changes his pokemon
 			pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
-			int selectedAttack=trainer1.requestAttack();					//We save the attack selected to maintain the order of the turn
+			int selectedAttack=trainer1.requestAttack(pokemon1);			//We save the attack selected to maintain the order of the turn
 			pokemon2.showHealth();
 			pokemon1.attack(selectedAttack, pokemon2);
 			return true;

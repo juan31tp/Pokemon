@@ -8,24 +8,22 @@ public class User extends Trainer implements UserPresenter{
 
 	@Override
 	public String requestName() {
-		return null;
+		return presenter.requestName();
 	}
 
 	@Override
 	public int requestOption() {
-		return 0;
+		return presenter.requestOption();
 	}
 
 	@Override
-	public int requestAttack() {
-		return 0;
+	public int requestAttack(Pokemon pokemon) {
+		return presenter.requestAttack(pokemon);
 	}
 
 	@Override
 	public int requestPokemon() {
-		return 0;
+		return presenter.requestPokemon(this);
 	}
-
-
 
 }

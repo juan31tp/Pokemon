@@ -44,8 +44,14 @@ public class Physical implements Category{
 		
 		
 		//HURT CALCULATION
-		hurt=(int) (0.01 * b * e * variation * (((0.2*N+1)*a*p)/25*d + 2));
-	
+		int z = (int) (0.01*b*e*variation);
+		int x = (int) (0.2*N+1);
+		int y = (int) (a*p);
+		int h = (int) (25*d);
+		hurt=z* (((x*y)/h) +2);
+		System.out.println("Daño realizado "+hurt);
+		//presenter.showHurtToTheEnemy
+		
 		
 		return hurt;
 	}

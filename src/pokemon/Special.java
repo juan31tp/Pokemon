@@ -26,11 +26,20 @@ public class Special implements Category{
 		double a=0, p=0, d=0, b=0, e=0;
 		
 		
+		
 		//Bonification calculation
-		if(attack.getType()==attacker.specie.type || attack.getType()==attacker.specie.subType) {
-			b=1.5;
+		if(attacker.specie.subType==null) {
+			if(attack.getType()==attacker.specie.type) {
+				b=1.5;
+			} else {
+				b=1;
+			}
 		} else {
-			b=1;
+			if (attack.getType()==attacker.specie.type || attack.getType()==attacker.specie.subType){
+				b=1.5;
+			} else {
+				b=1;
+			}
 		}
 		
 		//Efectivity calculation
@@ -45,7 +54,13 @@ public class Special implements Category{
 		//Attack calculation
 		a=attacker.getSpecie().getSpecialAttack();
 		
-		hurt=(int) (0.01 * b * e * variation * (((0.2*N+1)*a*p)/25*d + 2));
+		//HURT CALCULATION
+		int z = (int) (0.01*b*e*variation);
+		int x = (int) (0.2*N+1);
+		int y = (int) (a*p);
+		int h = (int) (25*d);
+		hurt=z*(((x*y)/h) +2);
+		System.out.println("Daño realizado "+hurt);
 	
 		
 		return hurt;

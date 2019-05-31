@@ -72,6 +72,10 @@ public class Attack {
 	Category getCategory() {
 		return category;
 	}
+	
+	public String toString() {
+		return String.format(attackName);
+	}
 
 	
 }

@@ -30,7 +30,7 @@ public enum Database {
 
 	private void loadTypes() {
 		
-		try(BufferedReader objReader=new BufferedReader(new FileReader("database/FicheroTipos.csv"))){
+		try(BufferedReader objReader=new BufferedReader(new FileReader("src/database/FicheroTipos.csv"))){
 			types = objReader.lines()
 							 .map(s -> s.split(";"))
 							 .collect(Collectors.toMap( array -> Integer.parseInt(array[0]),  array -> new Type(Integer.parseInt(array[0]), array[1])));
@@ -44,7 +44,7 @@ public enum Database {
 
 	private void loadEfectivities() {
 	
-		try(BufferedReader objReader=new BufferedReader(new FileReader("database/FicheroEfectividades.csv"))){
+		try(BufferedReader objReader=new BufferedReader(new FileReader("src/database/FicheroEfectividades.csv"))){
 			efectivities = objReader.lines()
 									.map(s -> s.split(";"))
 									.collect(Collectors.groupingBy( array -> types.get(Integer.parseInt(array[0])), 
@@ -59,7 +59,7 @@ public enum Database {
 
 	private void loadAttacks() {
 		
-		try(BufferedReader objReader=new BufferedReader(new FileReader("database/FicheroMovimientos.csv"))){
+		try(BufferedReader objReader=new BufferedReader(new FileReader("src/database/FicheroMovimientos.csv"))){
 			attacks = objReader.lines()
 							   .map(s -> s.split(";"))
 							   .collect(Collectors.toMap( array -> Integer.parseInt(array[0]), 
@@ -74,13 +74,13 @@ public enum Database {
 
 	private void loadSpecies() {
 		
-		try(BufferedReader objReader=new BufferedReader(new FileReader("database/FicheroEspecies.csv"))){
+		try(BufferedReader objReader=new BufferedReader(new FileReader("src/database/FicheroEspecies.csv"))){
 			species = objReader.lines()
 							   .map(s -> s.split(";"))
 							   .collect(Collectors.toMap( array -> Integer.parseInt(array[0]), 
 									  array -> (new Specie(array[1], Integer.parseInt(array[2]), Integer.parseInt(array[3]), Integer.parseInt(array[4]), Integer.parseInt(array[5]),
-											  				Integer.parseInt(array[6]), Integer.parseInt(array[7]), types.get(Integer.parseInt(array[8])), types.get(Integer.parseInt(array[9])), 
-											  				List.of(attacks.get(array[10]), attacks.get(array[11]), attacks.get(array[12]), attacks.get(array[13]))
+											  				Integer.parseInt(array[6]), Integer.parseInt(array[7]), types.get(Integer.parseInt(array[8])), array[9].equals("")?null:types.get(Integer.parseInt(array[9])), 
+											  				List.of(attacks.get(Integer.parseInt(array[10])), attacks.get(Integer.parseInt(array[11])), attacks.get(Integer.parseInt(array[12])), attacks.get(Integer.parseInt(array[13])))
 											  				))));
 		
 		} catch (FileNotFoundException e) {

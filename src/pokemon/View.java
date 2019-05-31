@@ -37,11 +37,11 @@ public class View implements PresenterView{
 		int option;
 		
 		do {
-			System.out.println("\nPlease, select the pokemon you want to go on with:\n 1." + trainer.pokeTeam.get(0).getSpecie().getName() + trainer.pokeTeam.get(0).getHealth() +
-																				   "\n 2." + trainer.pokeTeam.get(1).getSpecie().getName() + trainer.pokeTeam.get(1).getHealth() +
-																				   "\n 3." + trainer.pokeTeam.get(2).getSpecie().getName() + trainer.pokeTeam.get(2).getHealth());
+			System.out.println("\nPlease, select the pokemon you want to go on with:\n 1." + trainer.pokeTeam.get(0).getSpecie().getName() + " - Health: " + trainer.pokeTeam.get(0).getHealth() +
+																				   "\n 2." + trainer.pokeTeam.get(1).getSpecie().getName() + " - Health: " + trainer.pokeTeam.get(1).getHealth() +
+																				   "\n 3." + trainer.pokeTeam.get(2).getSpecie().getName() + " - Health: " + trainer.pokeTeam.get(2).getHealth());
 			
-			option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED);
+			option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED)-1;
 			
 			if(trainer.pokeTeam.get(option).getStatus() instanceof Died) {
 				System.out.println("You can't get a pokemon that is died!");
@@ -49,7 +49,7 @@ public class View implements PresenterView{
 			
 		}while(trainer.pokeTeam.get(option).getStatus() instanceof Died);
 		
-		return 0;
+		return option;
 	}
 
 	@Override
@@ -57,12 +57,12 @@ public class View implements PresenterView{
 		
 		int option;
 		
-		System.out.println("\nPlease, select the pokemon you want to go on with:\n 1." + pokemon.getSpecie().getAttackList().get(0) +
-				   															   "\n 2." + pokemon.getSpecie().getAttackList().get(1) +
-				   															   "\n 3." + pokemon.getSpecie().getAttackList().get(2) +
-				   															   "\n 4." + pokemon.getSpecie().getAttackList().get(4));
+		System.out.println("\nPlease, select the attack you want to go on with: \n 1." + pokemon.getSpecie().getAttackList().get(0).toString() +
+				   															   "\n 2." + pokemon.getSpecie().getAttackList().get(1).toString() +
+				   															   "\n 3." + pokemon.getSpecie().getAttackList().get(2).toString() +
+				   															   "\n 4." + pokemon.getSpecie().getAttackList().get(3).toString());
 
-		option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED);
+		option=Keyboard.readRange(1, 4, Range.BOTHINCLUDED)-1;
 	
 		return option;
 	}
@@ -78,7 +78,7 @@ public class View implements PresenterView{
 	//Method that shows the name of the pokemon and the life of it
 	public void showHealth(Pokemon pokemon) {
 		//If the pokemon's life is bigger than the 70% of his total life, we show it in green
-		if(pokemon.getHealth()>0.7*pokemon.getSpecie().getHealth()) {
+		if(pokemon.getHealth() > 0.7*pokemon.getSpecie().getHealth()) {
 			System.out.println("The pokemon " + pokemon.getSpecie().getName() + " has " + Colores.VERDE + pokemon.getHealth() + Colores.RESET + " life points");
 		//If the pokemon's life is bigger than the 40% of his total life, and smaller than 70%, we show it in yellow
 		} else if(0.7*pokemon.getSpecie().getHealth()<pokemon.getHealth() && pokemon.getHealth()>0.4*pokemon.getSpecie().getHealth()) {
@@ -96,47 +96,47 @@ public class View implements PresenterView{
 
 	//This method announces what trainer won
 	public void showWinner(Trainer trainer) {
-		System.out.print(Colores.AZUL + "-------------------------------------------------------\n "+ trainer.name + "HAS WON THE GAME \n-------------------------------------------------------"+ Colores.RESET);
+		System.out.print(Colores.AZUL + "-------------------------------------------------------\n "+ trainer.getName() + " HAS WON THE GAME \n-------------------------------------------------------"+ Colores.RESET);
 	}
 
 	//This method says that the pokemon can't have more than one status
 	public void noMoreStates(Pokemon pokemon) {
-		System.out.println(pokemon.getSpecie().getName() + " can't have more than one status!");
+		System.out.println(pokemon.getSpecie().getName() + " can't have more than one status!\n");
 	}
 
 	//This method announces that your pokemon is poisoned
 	public void isPoisoned(Pokemon pokemon) {
-		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + " is now poisoned!");
+		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + " is now poisoned!\n");
 	}
 
 	//This method announces that your pokemon is slept
 	public void isSlept(Pokemon pokemon) {
-		System.out.println(Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is now sleping zZzZzZ");
+		System.out.println(Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is now sleping zZzZzZ\n");
 	}
 
 	//This method announces that your pokemon is paralized
 	public void isParalized(Pokemon pokemon) {
-		System.out.println(Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is now paralized!");
+		System.out.println(Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is now paralized!\n");
 	}
 
 	//This method announces that your pokemon is healthy
 	public void isHealthy(Pokemon pokemon) {
-		System.out.println(Colores.VERDE + pokemon.getSpecie().getName() + Colores.RESET + " is now healthy!");
+		System.out.println(Colores.VERDE + pokemon.getSpecie().getName() + Colores.RESET + " is now healthy!\n");
 	}
 
 	//This method announces that your pokemon couldnt attack because he is paralized
 	public void dontAttackParalized(Pokemon pokemon) {
-		System.out.print("Oh, you couldn't attack because " + Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is paralized!" );
+		System.out.print("Oh, you couldn't attack because " + Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is paralized!\n");
 	}
 
 	//This method announces that your pokemon lost life because of poison
 	public void lifeLostPoisoned(Pokemon pokemon) {
-		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + "lost life because of poison!");
+		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + "lost life because of poison!\n");
 	}
 
 	//This method announces that your pokemon couldnt attack because he is paralized
 	public void dontAttackSlept(Pokemon pokemon) {
-		System.out.print("Oh, you couldn't attack because " + Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is sleeping zZzZzZzZ" );
+		System.out.print("Oh, you couldn't attack because " + Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is sleeping zZzZzZzZ\n");
 	}
 	
 }

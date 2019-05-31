@@ -14,7 +14,7 @@ public class Specie {
 		return name;
 	}
 
-	public Specie(String pokemonName, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, Type type, Type subType, List<Attack> attackList) {
+	public Specie(String name, int health, int attack, int defense, int specialAttack, int specialDefense, int speed, Type type, Type subType, List<Attack> attackList) {
 		this.name=name;
 		this.health=health;
 		this.attack=attack;
