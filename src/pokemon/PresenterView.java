@@ -5,8 +5,8 @@ public interface PresenterView {
 	/*Request methods*/
 	String requestName();
 	int requestOption();
-	int requestPokemon();
-	int requestAttack();
+	int requestPokemon(Trainer trainer);
+	int requestAttack(Pokemon pokemon);
 	
 	/*Show methods*/
 	void showHealth(Pokemon pokemon);
@@ -19,5 +19,7 @@ public interface PresenterView {
 	void dontAttackParalized(Pokemon attacker);
 	void lifeLostPoisoned(Pokemon pokemon);
 	void dontAttackSlept(Pokemon pokemon);
+	
+	
 
 }

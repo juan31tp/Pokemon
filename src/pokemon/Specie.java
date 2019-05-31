@@ -58,4 +58,8 @@ public class Specie {
 	public double getSpecialAttack() {
 		return specialAttack;
 	}
+	
+	public List<Attack> getAttackList() {
+		return attackList;
+	}
 }

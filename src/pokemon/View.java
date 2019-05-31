@@ -2,27 +2,69 @@ package pokemon;
 
 import claseTeclado.Colores;
 import claseTeclado.Keyboard;
+import claseTeclado.Keyboard.Range;
 
 public class View implements PresenterView{
 
+	/* ----------------------------------- */
+	
+	/*     REQUESTING MESSAGES METHODS     */
+	
+	/* ----------------------------------- */
 	@Override
 	public String requestName() {
-		return null;
+		
+		String name=Keyboard.readString("Choose your nickname");
+		return name;
 	}
 
 	@Override
 	public int requestOption() {
+		
+		int option;
+		
+		System.out.println("\nPlease, select what you want to do this turn:\n 1.Attack!"
+				+ "														   \n 2.Change pokemon"
+				+ "														   \n 3.Surrender");
+		option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED);
+		
+		return option;
+	}
+
+	@Override
+	public int requestPokemon(Trainer trainer) {
+		
+		int option;
+		
+		do {
+			System.out.println("\nPlease, select the pokemon you want to go on with:\n 1." + trainer.pokeTeam.get(0).getSpecie().getName() + trainer.pokeTeam.get(0).getHealth() +
+																				   "\n 2." + trainer.pokeTeam.get(1).getSpecie().getName() + trainer.pokeTeam.get(1).getHealth() +
+																				   "\n 3." + trainer.pokeTeam.get(2).getSpecie().getName() + trainer.pokeTeam.get(2).getHealth());
+			
+			option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED);
+			
+			if(trainer.pokeTeam.get(option).getStatus() instanceof Died) {
+				System.out.println("You can't get a pokemon that is died!");
+			}
+			
+		}while(trainer.pokeTeam.get(option).getStatus() instanceof Died);
+		
 		return 0;
 	}
 
 	@Override
-	public int requestPokemon() {
-		return 0;
-	}
+	public int requestAttack(Pokemon pokemon) {
+		
+		int option;
+		
+		System.out.println("\nPlease, select the pokemon you want to go on with:\n 1." + pokemon.getSpecie().getAttackList().get(0) +
+				   															   "\n 2." + pokemon.getSpecie().getAttackList().get(1) +
+				   															   "\n 3." + pokemon.getSpecie().getAttackList().get(2) +
+				   															   "\n 4." + pokemon.getSpecie().getAttackList().get(4));
 
-	@Override
-	public int requestAttack() {
-		return 0;
+		option=Keyboard.readRange(1, 3, Range.BOTHINCLUDED);
+	
+		return option;
 	}
 
 	

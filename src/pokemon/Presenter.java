@@ -15,12 +15,12 @@ public class Presenter {
 		return view.requestName();
 	}
 	
-	public int requestPokemon() {
-		return view.requestPokemon();
+	public int requestPokemon(Trainer trainer) {
+		return view.requestPokemon(trainer);
 	}
 	
-	public int requestAttack() {
-		return view.requestAttack();
+	public int requestAttack(Pokemon pokemon) {
+		return view.requestAttack(pokemon);
 	}
 	
 	public void showHealth(Pokemon pokemon) {

@@ -8,5 +8,4 @@ public class Died implements Status{
 
 	public void resolveStatus(Pokemon pokemon) {
 	}
-
 }
