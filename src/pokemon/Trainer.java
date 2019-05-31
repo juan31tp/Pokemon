@@ -36,9 +36,28 @@ public abstract class Trainer {
 		Pokemon auxPokemon=pokemonFactoryRandomized.create();
 		Pokemon auxPokemon2=pokemonFactoryRandomized.create();
 		Pokemon auxPokemon3=pokemonFactoryRandomized.create();
-		//We assign the first pokemon
+		
+		//We add the first pokemon to the team
 		pokeTeam.add(auxPokemon);
+		
+		//We check if the specie of the second pokemon is the same as the specie of the first pokemon, if yes, we change it till the species are different
+		if(auxPokemon2.getSpecie()==auxPokemon.getSpecie()) {
+			do {
+				auxPokemon2=pokemonFactoryRandomized.create();
+			}while(auxPokemon2.getSpecie()==auxPokemon.getSpecie());
+		}
+		
+		//If they are not the same, we add the pokemon to the team
 		pokeTeam.add(auxPokemon2);
+	
+		//We check if the specie of the third pokemon is the same as the specie of the two first pokemon, if yes, we change it till the species are different
+		if(auxPokemon3.getSpecie()==auxPokemon2.getSpecie() || auxPokemon3.getSpecie()==auxPokemon.getSpecie()) {
+			do {
+				auxPokemon2=pokemonFactoryRandomized.create();
+			}while(auxPokemon3.getSpecie()==auxPokemon2.getSpecie() || auxPokemon3.getSpecie()==auxPokemon.getSpecie());
+		}	
+		
+		//If they are not the same, we add the pokemon to the team
 		pokeTeam.add(auxPokemon3);
 		
 	}
