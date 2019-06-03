@@ -6,7 +6,8 @@ public class Combat {
 
 	Trainer trainer1, trainer2;
 	Pokemon pokemon1, pokemon2;
-	Presenter presenter;
+	Presenter presenter = new Presenter();
+	boolean winnerShown=false;
 	
 	/* 0. We create the trainers
 	 * 		0.1 User will be allowed to choose his nickname
@@ -31,7 +32,7 @@ public class Combat {
 	Combat(){
 		
 		int option1, option2;
-		
+			
 		//0. We create the trainers
 		trainer1=new Machine();
 		trainer2=new Machine();
@@ -40,6 +41,8 @@ public class Combat {
 		trainer1.setName();
 		//0.2 Machine will take a random nickname
 		trainer2.setName();
+		
+		versus(trainer1, trainer2);
 		
 		//1. We assign three random pokemons to each trainer
 		trainer1.assignPokemon();
@@ -64,11 +67,13 @@ public class Combat {
 				}
 			}
 			
-		//We check if both trainers have at least one pokemon living in their teams
-		trainer1.teamAlive=trainer1.checkTeamLife();
-		trainer2.teamAlive=trainer2.checkTeamLife();
+			//We check if both trainers have at least one pokemon living in their teams
+			trainer1.teamAlive=trainer1.checkTeamLife();
+			trainer2.teamAlive=trainer2.checkTeamLife();
+		
 			
 		}while(!trainer1.surrender && !trainer2.surrender && trainer1.teamAlive && trainer2.teamAlive);
+		
 		
 		if(!trainer1.surrender || !trainer2.teamAlive) {
 			showWinner(trainer1);
@@ -78,10 +83,17 @@ public class Combat {
 			showWinner(trainer2);
 		}else if(trainer2.checkTeamLife()==false){
 			showWinner(trainer1);
-		}
-		                                         
-		
+			
+		} 
 	}
+
+	
+	
+	private void versus(Trainer trainer1, Trainer trainer2) {
+		presenter.versus(trainer1, trainer2);
+	}
+
+
 
 	private void showWinner(Trainer trainer) {
 		presenter.showWinner(trainer);
@@ -96,28 +108,18 @@ public class Combat {
 			int aux=trainer2.requestAttack(pokemon2); //We save the attack decided by trainer2 to use it or not, depending on if his pokemon die.
 			//If pokemon1 kills pokemon2, we will show the pokemon1 health and we will ask the trainer2 for another pokemon to continue
 			if(pokemon2.getHealth()<=0) {
-				//pokemon1.showHealth();
 				pokemon2.moveToDiedStatus();	//This method wills how the trianer that his pokemon has died
-				//pokemon2.attack(aux, pokemon1);
 				if(trainer2.checkTeamLife()){
 					pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
-				}else {
-					presenter.showWinner(trainer1);
 				}
-				//pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
-				//pokemon2.showHealth();
 			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
 			} else {
 				pokemon2.attack(aux, pokemon1);
 				if(pokemon1.getHealth()<=0) {
 					pokemon1.moveToDiedStatus();
-					pokemon1.hasDied();
 					if(trainer1.checkTeamLife()) {
 						pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
-					}else {
-						presenter.showWinner(trainer2);
 					}
-					//pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 				}
 			}
 			//We resolve the status from each pokemon
@@ -131,13 +133,9 @@ public class Combat {
 			int aux=trainer1.requestAttack(pokemon1); //We save the attack decided by trainer1 to use it or not, depending on if his pokemon die.
 			//If pokemon2 kills pokemon1, we will show the pokemon2 health and we will ask the trainer1 for another pokemon to continue
 			if(pokemon1.getHealth()<=0) {
-				//pokemon1.showHealth();
-				//pokemon1.hasDied();		//This method wills how the trianer that his pokemon has died
 				pokemon1.moveToDiedStatus();
 				if(trainer1.checkTeamLife()) {
 					pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
-				}else {
-					presenter.showWinner(trainer2);
 				}
 			//If pokemon1 doesnt kill pokemon2, pokemon2 will proceed with the attack
 			} else {
@@ -146,11 +144,10 @@ public class Combat {
 					pokemon2.moveToDiedStatus();
 					if(trainer2.checkTeamLife()){
 						pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
-					}else {
-						presenter.showWinner(trainer1);
 					}
 				}
 			}
+			
 			//We resolve the status from each pokemon
 			pokemon1.getStatus().resolveStatus(pokemon1);
 			pokemon2.getStatus().resolveStatus(pokemon2);

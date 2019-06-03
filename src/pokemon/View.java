@@ -138,5 +138,29 @@ public class View implements PresenterView{
 	public void dontAttackSlept(Pokemon pokemon) {
 		System.out.print("Oh, you couldn't attack because " + Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is sleeping zZzZzZzZ\n");
 	}
+
+	//This method shows the amount of hurt done to the enemy
+	public void showHurtToTheEnemy(Pokemon attacker, Pokemon enemy, int hurt) {
+		if(hurt==0) {
+			System.out.println("The attack of " + attacker.getSpecie().getName() + " was not effective against " + enemy.getSpecie().getName());
+		} else {
+			System.out.println(attacker.getSpecie().getName() + " has inflicted " + hurt + " to " + enemy.getSpecie().getName());
+		}
+	}
+
+	//This method shows that the pokemon has died
+	public void isDied(Pokemon pokemon) {
+		System.out.println(Colores.ROJO + " -- " + pokemon.getSpecie().getName() + " has died --" + Colores.RESET);
+	}
+
+	//This method introduces the combat
+	public void versus(Trainer trainer1, Trainer trainer2) {
+		System.out.println(" PREPARE FOR THE BATTLE\n " + trainer1.getName() + " VS " + trainer2.getName() + " \n READY? GO!");
+	}
+
+	//This methdo shows that the pokemon failed his attack
+	public void attackFailed(Pokemon pokemon) {
+		System.out.println(pokemon.getSpecie().getName() + " failed his attack!");
+	}
 	
 }

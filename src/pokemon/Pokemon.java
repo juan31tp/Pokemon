@@ -87,7 +87,7 @@ public class Pokemon implements pokemonPresenter{
 	
 	void moveToPoisonedStatus() {
 		if(status==healthy) {
-			this.status=slept;
+			this.status=poisoned;
 			turnsAffected= 5;
 			isPoisoned(this);
 		} else {
@@ -97,8 +97,9 @@ public class Pokemon implements pokemonPresenter{
 	
 	void moveToDiedStatus() {
 		this.status=died;
+		isDied(this);
 	}
-	
+
 	void moveToHealthyStatus() {
 		this.status=healthy;
 	}
@@ -140,4 +141,16 @@ public class Pokemon implements pokemonPresenter{
 		presenter.dontAttackSlept(pokemon);
 	}
 	
+	public void showHurtToTheEnemy(Pokemon enemy, int hurt) {
+		presenter.showHurtToTheEnemy(this, enemy, hurt);
+	}
+	
+	private void isDied(Pokemon pokemon) {
+		presenter.isDied(pokemon);
+	}
+
+	public void attackFailed() {
+		presenter.attackFailed(this);
+	}
+
 }

@@ -19,6 +19,10 @@ public interface PresenterView {
 	void dontAttackParalized(Pokemon attacker);
 	void lifeLostPoisoned(Pokemon pokemon);
 	void dontAttackSlept(Pokemon pokemon);
+	void showHurtToTheEnemy(Pokemon attacker, Pokemon enemy, int hurt);
+	void isDied(Pokemon pokemon);
+	void versus(Trainer trainer1, Trainer trainer2);
+	void attackFailed(Pokemon pokemon);
 	
 	
 

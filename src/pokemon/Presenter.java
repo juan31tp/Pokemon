@@ -62,4 +62,20 @@ public class Presenter {
 	public void dontAttackSlept(Pokemon pokemon) {
 		view.dontAttackSlept(pokemon);
 	}
+
+	public void showHurtToTheEnemy(Pokemon attacker, Pokemon enemy, int hurt) {
+		view.showHurtToTheEnemy(attacker, enemy, hurt);
+	}
+
+	public void isDied(Pokemon pokemon) {
+		view.isDied(pokemon);
+	}
+
+	public void versus(Trainer trainer1, Trainer trainer2) {
+		view.versus(trainer1,trainer2);
+	}
+
+	public void attackFailed(Pokemon pokemon) {
+		view.attackFailed(pokemon);
+	}
 }

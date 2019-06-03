@@ -77,5 +77,8 @@ public class Attack {
 		return String.format(attackName);
 	}
 
+	public int getPrecision() {
+		return precision;
+	}
 	
 }

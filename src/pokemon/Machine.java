@@ -8,7 +8,7 @@ public class Machine extends Trainer{
 	
 	@Override
 	String requestName() {
-		String[] nicknames= {"Tony el llorón", "Jaime el Caterpie", "Yogurt de Avellana con Caramelo"};
+		String[] nicknames= {"Tony el llorón", "Jaime el Caterpie", "Eva programmer", "Pedro la Joyita"};
 		
 		int rnd = r.nextInt(nicknames.length-0) + 0;
 		

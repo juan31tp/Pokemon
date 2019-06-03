@@ -55,13 +55,14 @@ public class Special implements Category{
 		a=attacker.getSpecie().getSpecialAttack();
 		
 		//HURT CALCULATION
-		int z = (int) (0.01*b*e*variation);
-		int x = (int) (0.2*N+1);
-		int y = (int) (a*p);
-		int h = (int) (25*d);
-		hurt=z*(((x*y)/h) +2);
-		System.out.println("Daño realizado "+hurt);
-	
+		double z = (0.01*b*e*variation);
+		double x = (0.2*N+1);
+		double y = (a*p);
+		double h = (25*d);
+		hurt=(int)(z* (((x*y)/h) +2));
+		
+		//This method shows the hurt done
+		attacker.showHurtToTheEnemy(enemy, hurt);
 		
 		return hurt;
 	}

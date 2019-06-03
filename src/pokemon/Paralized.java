@@ -11,7 +11,13 @@ public class Paralized implements Status{
 		if(rnd==1) {
 			attacker.dontAttackParalized(attacker);
 		} else {
-			attacker.getSpecie().getAttack(attack).attack(attacker, enemy);
+			int rnd2 = (int) (Math.random() * 100) + 1;
+			
+			if(rnd2 <= attacker.getSpecie().getAttack(attack).getPrecision()) {
+				attacker.getSpecie().getAttack(attack).attack(attacker, enemy);
+			} else {
+				attacker.attackFailed();
+			}
 		}
 		
 		
