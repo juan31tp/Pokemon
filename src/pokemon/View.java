@@ -101,27 +101,27 @@ public class View implements PresenterView{
 
 	//This method says that the pokemon can't have more than one status
 	public void noMoreStates(Pokemon pokemon) {
-		System.out.println(pokemon.getSpecie().getName() + " can't have more than one status!\n");
+		System.out.println(pokemon.getSpecie().getName() + " can't have more than one status!");
 	}
 
 	//This method announces that your pokemon is poisoned
 	public void isPoisoned(Pokemon pokemon) {
-		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + " is now poisoned!\n");
+		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + " is now poisoned!");
 	}
 
 	//This method announces that your pokemon is slept
 	public void isSlept(Pokemon pokemon) {
-		System.out.println(Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is now sleping zZzZzZ\n");
+		System.out.println(Colores.CELESTE + pokemon.getSpecie().getName() + Colores.RESET + " is now sleping zZzZzZ");
 	}
 
 	//This method announces that your pokemon is paralized
 	public void isParalized(Pokemon pokemon) {
-		System.out.println(Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is now paralized!\n");
+		System.out.println(Colores.AMARILLO + pokemon.getSpecie().getName() + Colores.RESET + " is now paralized!");
 	}
 
 	//This method announces that your pokemon is healthy
 	public void isHealthy(Pokemon pokemon) {
-		System.out.println(Colores.VERDE + pokemon.getSpecie().getName() + Colores.RESET + " is now healthy!\n");
+		System.out.println(Colores.VERDE + pokemon.getSpecie().getName() + Colores.RESET + " is now healthy!");
 	}
 
 	//This method announces that your pokemon couldnt attack because he is paralized
@@ -131,7 +131,7 @@ public class View implements PresenterView{
 
 	//This method announces that your pokemon lost life because of poison
 	public void lifeLostPoisoned(Pokemon pokemon) {
-		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + "lost life because of poison!\n");
+		System.out.println(Colores.MORADO + pokemon.getSpecie().getName() + Colores.RESET + " lost life because of poison!");
 	}
 
 	//This method announces that your pokemon couldnt attack because he is paralized
@@ -155,7 +155,7 @@ public class View implements PresenterView{
 
 	//This method introduces the combat
 	public void versus(Trainer trainer1, Trainer trainer2) {
-		System.out.println(" PREPARE FOR THE BATTLE\n " + trainer1.getName() + " VS " + trainer2.getName() + " \n READY? GO!");
+		System.out.println("- PREPARE FOR THE BATTLE\n- " + trainer1.getName() + " VS " + trainer2.getName() + " \n- READY? GO!");
 	}
 
 	//This methdo shows that the pokemon failed his attack

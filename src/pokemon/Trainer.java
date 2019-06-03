@@ -74,6 +74,7 @@ public abstract class Trainer {
 	public String getName() {
 		return name;
 	}
+	
 
 	
 }

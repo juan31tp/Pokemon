@@ -1,7 +1,5 @@
 package pokemon;
 
-import java.util.List;
-
 public class Combat {
 
 	Trainer trainer1, trainer2;
@@ -162,22 +160,23 @@ public class Combat {
 		
 		boolean anyChange=false;
 		
-		if(option1==2) {
+		if(option1==2 && option2==2) {
+			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
+			pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+		} else if (option1==2 && option2!=2){
 			//Trainer 1 changes his pokemon
 			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 			int selectedAttack=trainer2.requestAttack(pokemon2);			//We save the attack selected to maintain the order of the turn
 			pokemon1.showHealth();
 			pokemon2.attack(selectedAttack, pokemon1);
 			return true;
-		} else if (option2==2){
+		} else if (option2==2 && option1!=2) {
 			//Trainer 1 changes his pokemon
 			pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
 			int selectedAttack=trainer1.requestAttack(pokemon1);			//We save the attack selected to maintain the order of the turn
 			pokemon2.showHealth();
 			pokemon1.attack(selectedAttack, pokemon2);
 			return true;
-		} else if (option1==2 && option2==2) {
-			
 		}
 		
 		
