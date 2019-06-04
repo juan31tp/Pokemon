@@ -32,7 +32,7 @@ public class Combat {
 		int option1, option2;
 			
 		//0. We create the trainers
-		trainer1=new Machine();
+		trainer1=new User();
 		trainer2=new Machine();
 		
 		//0.1 User will be allowed to choose his nickname
