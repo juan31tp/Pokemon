@@ -62,4 +62,13 @@ public class Specie {
 	public List<Attack> getAttackList() {
 		return attackList;
 	}
+	
+	public boolean equals(Object specie) {
+		boolean result=false;
+		
+		if(specie instanceof Specie && name.equals(((Specie)specie).name)){
+			result=true;
+		}
+		return result;
+	}
 }

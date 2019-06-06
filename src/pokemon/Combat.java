@@ -32,13 +32,13 @@ public class Combat {
 		int option1, option2;
 			
 		//0. We create the trainers
-		trainer1=new User();
+		trainer1=new Machine();
 		trainer2=new Machine();
 		
 		//0.1 User will be allowed to choose his nickname
-		trainer1.setName();
+		trainer1.askName();
 		//0.2 Machine will take a random nickname
-		trainer2.setName();
+		trainer2.askName();
 		
 		versus(trainer1, trainer2);
 		

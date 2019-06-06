@@ -3,10 +3,6 @@ package pokemon;
 public class User extends Trainer implements UserPresenter{
 
 	@Override
-	public void showWinner() {
-	}
-
-	@Override
 	public String requestName() {
 		return presenter.requestName();
 	}

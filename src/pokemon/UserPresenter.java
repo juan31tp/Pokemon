@@ -8,6 +8,4 @@ public interface UserPresenter {
 	int requestPokemon();
 	int requestAttack(Pokemon pokemon);
 	
-	/*Show methods*/
-	void showWinner();
 }

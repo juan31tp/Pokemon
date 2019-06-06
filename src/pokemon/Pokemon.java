@@ -65,43 +65,43 @@ public class Pokemon implements pokemonPresenter{
 	/* ------------------ MOVE BETWEEN DIFFERENT STATUS METHODS -----------------*/
 	void moveToParalizedStatus() {
 		if(status==healthy) {
-			this.status=paralized;
+			status=paralized;
 			isParalized=true;
-			this.speed=speed/2;
-			isParalized(this);
+			speed=speed/2;
+			messageIsParalized();
 		} else {
-			noMoreStates(this);
+			messageNoMoreStatus();
 		}
 		
 	}
 	
 	void moveToSleptStatus() {
 		if(status==healthy) {
-			this.status=slept;
+			status=slept;
 			turnsAffected= (int) ((Math.random() * ((5 - 1) + 1)) + 1);
-			isSlept(this);
+			messageIsSlept();
 		} else {
-			noMoreStates(this);
+			messageNoMoreStatus();
 		}
 	}
 	
 	void moveToPoisonedStatus() {
 		if(status==healthy) {
-			this.status=poisoned;
+			status=poisoned;
 			turnsAffected= 5;
-			isPoisoned(this);
+			messageIsPoisoned();
 		} else {
-			noMoreStates(this);
+			messageNoMoreStatus();
 		}
 	}
 	
 	void moveToDiedStatus() {
-		this.status=died;
-		isDied(this);
+		status=died;
+		isDied();
 	}
 
 	void moveToHealthyStatus() {
-		this.status=healthy;
+		status=healthy;
 	}
 
 	/* ------------------PRESENTER FUNCTIONS -----------------*/
@@ -113,20 +113,20 @@ public class Pokemon implements pokemonPresenter{
 		presenter.hasDied(this);
 	}
 
-	public void isParalized(Pokemon pokemon) {
-		presenter.isParalized(pokemon);
+	public void messageIsParalized() {
+		presenter.isParalized(this);
 	}
 
-	public void isSlept(Pokemon pokemon) {
-		presenter.isSlept(pokemon);
+	public void messageIsSlept() {
+		presenter.isSlept(this);
 	}
 
-	public void isPoisoned(Pokemon pokemon) {
-		presenter.isPoisoned(pokemon);
+	public void messageIsPoisoned() {
+		presenter.isPoisoned(this);
 	}
 
-	public void noMoreStates(Pokemon pokemon) {
-		presenter.noMoreStates(pokemon);
+	public void messageNoMoreStatus() {
+		presenter.noMoreStates(this);
 	}
 
 	public void dontAttackParalized(Pokemon pokemon) {
@@ -145,8 +145,8 @@ public class Pokemon implements pokemonPresenter{
 		presenter.showHurtToTheEnemy(this, enemy, hurt);
 	}
 	
-	private void isDied(Pokemon pokemon) {
-		presenter.isDied(pokemon);
+	private void isDied() {
+		presenter.isDied(this);
 	}
 
 	public void attackFailed() {
