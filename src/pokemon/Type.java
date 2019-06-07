@@ -2,11 +2,12 @@ package pokemon;
 
 public class Type {
 
+	private  int id;
+	private String type;
 	
 	/*Constructor*/
-	public Type(int parseInt, String string) {
-		// TODO Auto-generated constructor stub
+	public Type(int id, String type) {
+		this.id=id;
+		this.type=type;
 	}
-	Type attack, enemyPokemon;
-	float multiplier;
 }

@@ -69,7 +69,7 @@ public class Attack {
 		this.category=category;
 	}
 	
-	Category getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 	

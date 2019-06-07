@@ -32,7 +32,7 @@ public class Combat {
 		int option1, option2;
 			
 		//0. We create the trainers
-		trainer1=new Machine();
+		trainer1=new User();
 		trainer2=new Machine();
 		
 		//0.1 User will be allowed to choose his nickname
@@ -163,12 +163,15 @@ public class Combat {
 		if(option1==2 && option2==2) {
 			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 			pokemon2=trainer2.pokeTeam.get(trainer2.requestPokemon());
+			return true;
 		} else if (option1==2 && option2!=2){
 			//Trainer 1 changes his pokemon
 			pokemon1=trainer1.pokeTeam.get(trainer1.requestPokemon());
 			int selectedAttack=trainer2.requestAttack(pokemon2);			//We save the attack selected to maintain the order of the turn
 			pokemon1.showHealth();
 			pokemon2.attack(selectedAttack, pokemon1);
+			pokemon1.getStatus().resolveStatus(pokemon1);
+			pokemon2.getStatus().resolveStatus(pokemon2);
 			return true;
 		} else if (option2==2 && option1!=2) {
 			//Trainer 1 changes his pokemon
@@ -176,6 +179,8 @@ public class Combat {
 			int selectedAttack=trainer1.requestAttack(pokemon1);			//We save the attack selected to maintain the order of the turn
 			pokemon2.showHealth();
 			pokemon1.attack(selectedAttack, pokemon2);
+			pokemon1.getStatus().resolveStatus(pokemon1);
+			pokemon2.getStatus().resolveStatus(pokemon2);
 			return true;
 		}
 		
